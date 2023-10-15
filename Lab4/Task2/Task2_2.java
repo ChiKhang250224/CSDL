@@ -1,39 +1,16 @@
 package Task2;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Task2_2 {
-
 	public static void quickSort(int[] array, int low, int high) {
 		if (low < high) {
-			int pivotIndex = partition(array, low, high);
-			quickSort(array, low, pivotIndex);
-			quickSort(array, pivotIndex + 1, high);
+			int pivotIndex = getPivot_MedianOfThree(array, low, high);
+			int newPivotIndex = partition(array, low, high, pivotIndex);
+			quickSort(array, low, newPivotIndex - 1);
+			quickSort(array, newPivotIndex + 1, high);
 		}
-	}
-
-	private static int partition(int[] array, int low, int high) {
-		int pivot = getPivot_MedianOfThree(array, low, high);
-		int i = low - 1;
-		int j = high + 1;
-		while (true) {
-			do {
-				i++;
-			} while (array[i] < pivot);
-			do {
-				j--;
-			} while (array[j] > pivot);
-			if (i >= j) {
-				return j;
-			}
-			swap(array, i, j);
-		}
-	}
-
-	private static void swap(int[] array, int i, int j) {
-		int temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
 	}
 
 	private static int getPivot_MedianOfThree(int[] array, int low, int high) {
@@ -44,22 +21,46 @@ public class Task2_2 {
 			swap(array, low, high);
 		if (array[mid] > array[high])
 			swap(array, mid, high);
-		return array[mid];
+		return mid;
 	}
 
 	private static int getPivot_First(int[] array) {
-		return array[0];
+		return 0;
 	}
 
 	private static int getPivot_Last(int[] array) {
-		return array[array.length - 1];
+		return array.length - 1;
 	}
 
 	private static int getPivot_Random(int[] array) {
 		Random rand = new Random();
-		return array[rand.nextInt(array.length)];
+		return rand.nextInt(array.length);
 	}
+
+	private static int partition(int[] array, int low, int high, int pivotIndex) {
+		swap(array, pivotIndex, high);
+		int i = low - 1;
+		for (int j = low; j < high; j++) {
+			if (array[j] <= array[high]) {
+				i++;
+				swap(array, i, j);
+			}
+		}
+		swap(array, i + 1, high);
+		return (i + 1);
+	}
+
+	private static void swap(int[] array, int i, int j) {
+		int temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+
 	public static void main(String[] args) {
-		
+		int[] array = { 10, 7, 8, 9, 1, 5 };
+		int n = array.length;
+		quickSort(array, 0, n - 1);
+		System.out.println(Arrays.toString(array));
+
 	}
 }
