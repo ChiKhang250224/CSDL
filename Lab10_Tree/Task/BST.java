@@ -300,29 +300,29 @@ public class BST<E extends Comparable<E>> {
 		bst.add(12);
 		bst.add(18);
 
-		System.out.println("Inorder traversal:");
+		System.out.println("Inorder:");
 		bst.inorder(bst.getRoot());
 		System.out.println();
 
-		System.out.println("Preorder traversal:");
+		System.out.println("Preorder:");
 		bst.preorder(bst.getRoot());
 		System.out.println();
 
-		System.out.println("Postorder traversal:");
+		System.out.println("Postorder: ");
 		bst.postorder(bst.getRoot());
 		System.out.println();
 
-		System.out.println("Min element: " + bst.findMin());
-		System.out.println("Max element: " + bst.findMax());
-		System.out.println("BST height: " + bst.height());
+		System.out.println(bst.findMin());
+		System.out.println(bst.findMax());
+		System.out.println(bst.height());
 
 		int elementToSearch = 7;
-		System.out.println("Is " + elementToSearch + " in BST? " + bst.contains(elementToSearch));
+		System.out.println(bst.contains(elementToSearch));
 
 		int elementToRemove = 5;
-		System.out.println("Removing " + elementToRemove + " from BST: " + bst.remove(elementToRemove));
+		System.out.println(bst.remove(elementToRemove));
 
-		System.out.println("Inorder traversal after removal:");
+		System.out.println("Inorder sau khi xoa");
 		bst.inorder(bst.getRoot());
 	}
 
